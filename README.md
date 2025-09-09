@@ -37,17 +37,11 @@ End-to-end samples showing how to:
 
 ---
 
-## Features (Current)
+## Features
 * Create a thread, submit Deep Research queries, poll run status
 * Convert final agent response into Markdown or PDF (inline numeric citations → references section)
 * Streaming endpoint for a Web Search (Bing grounded) agent with incremental deltas & embedded citation payload
 * Automatic citation formatting & optional base64 image streaming for code interpreter outputs (if enabled in agent)
-
-### Planned / Extendable
-* Persistent storage (DB) for runs & reports
-* Auth (Azure AD / API keys)
-* Front-end UI (React / Static HTML) for interactive research dashboards
-* Additional tool integrations (custom functions / vector search)
 
 ---
 
