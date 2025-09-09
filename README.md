@@ -16,8 +16,7 @@ End-to-end samples showing how to:
 ├── api/                         # FastAPI service exposing agent endpoints
 │   ├── main.py                  # Deep Research + streaming agent endpoints (thread, run, status, download)
 │   ├── requirements.txt         # Python dependencies for the API layer
-│   ├── Dockerfile               # (Optional) container build for the API
-│   └── README.md                # API-specific details (legacy / supplemental)
+│   └── Dockerfile               # (Optional) container build for the API
 ├── notebooks/                   # Interactive setup & experimentation notebooks
 │   ├── 01A_DeepResearch_Agent_Creation.ipynb   # Create/configure a Deep Research agent
 │   ├── 01B_WebSearch_Agent_Creation.ipynb      # Create/configure a Web Search (Bing grounded) agent
@@ -57,7 +56,7 @@ You will need:
 
 1. An Azure subscription with access to Azure AI Foundry
 2. An Azure AI Foundry Project
-3. One or more deployed GPT model(s) (e.g., `gpt-4o`, `gpt-4o-mini`, or other supported latest model) in the project
+3. One or more deployed GPT model(s) (e.g., `gpt-4o`, `gpt-4o-mini`, or other supported latest model) in the project and the `o3-deep-research` model
 4. A Bing Search (Grounding) connection added to the project (for web search agent)
 5. Two Azure AI Agents (recommended naming):
 	 * Deep Research Agent (uses reasoning / deep research capability)
@@ -88,23 +87,12 @@ You will need:
 Create a `.env` in the `api/` directory (or export in your shell). Minimum required:
 
 ```
-PROJECT_ENDPOINT=<<your-project-endpoint>>
-AGENT_ID=<<deep-research-agent-id>>
-WEB_SEARCH_AGENT_ID=<<web-search-agent-id>>
-
-# Only if using Service Principal auth:
-AZURE_CLIENT_ID=<<app-id>>
-AZURE_CLIENT_SECRET=<<password>>
-AZURE_TENANT_ID=<<tenant-id>>
-```
-
-Optional / legacy (if you extend for additional features):
-```
+PROJECT_ENDPOINT=<<your-foundry-project-endpoint>>
 MODEL_DEPLOYMENT_NAME=<<primary-model-deployment>>
 DEEP_RESEARCH_MODEL_DEPLOYMENT_NAME=<<research-model-deployment>>
 BING_RESOURCE_NAME=<<bing-connection-name>>
-AOAI_ENDPOINT=<<azure-openai-endpoint>>
-AOAI_KEY=<<azure-openai-key>>
+AGENT_ID=<<deep-research-agent-id>>
+WEB_SEARCH_AGENT_ID=<<web-search-agent-id>>
 ```
 
 ---
@@ -206,17 +194,6 @@ When a Deep Research run completes:
 
 ---
 
-## Production Considerations
-| Area | Recommendation |
-|------|---------------|
-| Auth | Add Azure AD (OAuth2) or signed tokens before exposing externally |
-| Persistence | Store runs, messages, reports in a database (e.g., Cosmos DB, PostgreSQL) |
-| Storage | Offload PDFs & artifacts to Blob Storage |
-| Observability | Add structured logging + App Insights tracing |
-| Rate limiting | Protect against abusive concurrent runs |
-| Caching | Cache frequent queries / intermediate citations if allowed |
-
----
 
 ## Troubleshooting
 | Symptom | Likely Cause | Fix |
@@ -229,29 +206,7 @@ When a Deep Research run completes:
 
 ---
 
-## Roadmap / Ideas
-* Multi-turn research orchestration & summarization merges
-* Function tool calls (data retrieval, vector semantic expansion)
-* Web UI with live streaming and citation highlighting
-* Automated evaluation harness for research quality scoring
-
----
-
 ## License
 See `LICENSE` for details.
 
 ---
-
-## Quick Reference (Copy/Paste)
-Minimal `.env` template:
-```
-PROJECT_ENDPOINT=https://YOUR-PROJECT-REGION.api.cognitive.microsoft.com/azureai/projects/YOUR_PROJECT_ID
-AGENT_ID=YOUR_DEEP_RESEARCH_AGENT_ID
-WEB_SEARCH_AGENT_ID=YOUR_WEB_SEARCH_AGENT_ID
-```
-
----
-
-Questions or ideas for improvement? Open an issue or extend the samples and contribute back.
-
-Happy researching!
