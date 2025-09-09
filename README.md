@@ -6,7 +6,7 @@ End-to-end samples showing how to:
 2. Expose them through a lightweight FastAPI service (REST + streaming)
 3. Experiment and iterate using Jupyter notebooks for agent creation, testing, and evaluation
 
-> These samples are intended as a learning and starter kit. They are **not production hardened** (no auth, persistence, or scaling layer yet). Follow the Production Considerations section before real deployments.
+> These samples are intended as a learning and starter kit and are **not production hardened**.
 
 ---
 
